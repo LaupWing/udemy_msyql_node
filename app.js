@@ -15,9 +15,9 @@ console.log({
     database: process.env.DATABASE
 })
 
-connection.query('SELECT 1 + 1 AS solution', function(err, result){
+connection.query('SELECT * FROM users', function(err, result){
     if(err) throw err;
     console.log(result);
 });
 
-// connection.end()
+connection.end()
