@@ -9,13 +9,17 @@ const connection = mysql.createConnection({
     password: process.env.PASSWORD
 });
 
-console.log({
-    host: process.env.HOST,
-    user: process.env.USER,
-    database: process.env.DATABASE
-})
+const data = [];
+for(var i = 0; i < 500; i++){
+    data.push([
+        faker.internet.email(),
+        faker.date.past()
+    ]);
+}
+ 
+const q = 'INSERT INTO users (email, created_at) VALUES ?';
 
-connection.query('SELECT * FROM users', function(err, result){
+connection.query(q,[data], function(err, result){
     if(err) throw err;
     console.log(result);
 });
